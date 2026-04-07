@@ -16,18 +16,31 @@ const exportRoutes = require("./routes/exportRoutes");
 
 const app = express();
 
-// ✅ FIXED CORS (IMPORTANT)
+// ✅ FLEXIBLE CORS (Handles phone & laptop URL variations)
+const allowedOrigins = [
+  "https://campus-green-infra-planner.vercel.app",
+  "https://campus-green-infra-planner.vercel.app/"
+];
+
 app.use(cors({
-  origin: "https://campus-green-infra-planner.vercel.app", // your frontend
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      console.log("⚠️ BLOCKED BY CORS:", origin);
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   credentials: true
 }));
 
 // Middleware
 app.use(express.json());
 
-// Request Logger (optional but useful)
+// Request Logger (Prints the Device's Origin)
 app.use((req, res, next) => {
   console.log(`${new Date().toISOString()} - ${req.method} ${req.url}`);
+  console.log('Device Origin:', req.headers.origin || "Local/Direct");
   next();
 });
 
