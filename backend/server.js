@@ -1,6 +1,7 @@
 const express = require("express");
 require("dotenv").config();
 const cors = require("cors");
+const demoMiddleware = require("./middleware/demoMode");
 
 const connectDB = require("./config/db");
 
@@ -20,29 +21,14 @@ const app = express();
 app.use(cors({ origin: "*" }));
 app.use(express.json());
 
-// 🚨 EMERGENCY BYPASS (For Staff Presentation)
-app.post("/api/auth/login", (req, res) => {
-  res.json({
-    message: "Login successful",
-    token: "demo-token",
-    user: { id: "demo", name: "Staff Demo", email: req.body.email, role: "user" }
-  });
-});
-
-// ✅ Mock Data for Dashboards
-app.get("/api/zones", (req, res) => res.json([
-  { _id: "1", zoneId: "Z-01", name: "Main Garden", status: "Healthy" },
-  { _id: "2", zoneId: "Z-02", name: "Hostel Lawn", status: "Healthy" }
-]));
-app.get("/api/watering", (req, res) => res.json([]));
-app.get("/api/trimming", (req, res) => res.json([]));
-app.get("/api/waste", (req, res) => res.json([]));
+// 🚨 DEMO MODE (For Staff Presentation - 300 records per module)
+app.use(demoMiddleware);
 
 // ✅ Health Check
 app.get("/api/health", (req, res) => res.json({ status: "ok", message: "Backend is running" }));
 
-// ✅ Connect DB
-connectDB();
+// Database connection moved to server start for bypass stability
+// connectDB(); // Deactivating here to avoid blocking startup
 
 // API Routes
 app.use("/api/auth", authRoutes);
@@ -70,4 +56,7 @@ app.listen(PORT, () => {
   console.log(`✅ Server running on port ${PORT}`);
   console.log(`JWT_SECRET: ${process.env.JWT_SECRET ? "Set" : "Missing"}`);
   console.log(`MONGO_URI: ${process.env.MONGO_URI ? "Set" : "Missing"}`);
+  
+  // Connect to DB in the background to avoid blocking login bypass
+  connectDB();
 });
