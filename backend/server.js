@@ -30,11 +30,14 @@ app.use((req, res, next) => {
   next();
 });
 
+// Diagnostic Routes (BEFORE DB Connection)
+app.get("/", (req, res) => res.send("Campus Green Backend is Live!"));
+app.get("/api/health", (req, res) => res.json({ status: "ok", message: "Backend is running" }));
+
 // Connect Database
 connectDB();
 
-// Routes
-app.get("/api/health", (req, res) => res.json({ status: "ok", message: "Backend is running" }));
+// API Routes
 app.use("/api/auth", authRoutes);
 app.use("/api", plannerRoutes); // Fixed: Mounted at /api so /zones works
 app.use("/api/watering", wateringRoutes);
