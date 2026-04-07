@@ -1,7 +1,6 @@
 const express = require("express");
 require("dotenv").config();
 const cors = require("cors");
-const demoMiddleware = require("./middleware/demoMode");
 
 const connectDB = require("./config/db");
 
@@ -20,9 +19,6 @@ const app = express();
 // ✅ SIMPLE CORS (Fixes all Network Errors)
 app.use(cors({ origin: "*" }));
 app.use(express.json());
-
-// ✅ DEMO MODE (For Staff Presentation)
-app.use(demoMiddleware);
 
 // ✅ Health Check
 app.get("/api/health", (req, res) => res.json({ status: "ok", message: "Backend is running" }));
