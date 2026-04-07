@@ -78,16 +78,6 @@ const UserLogin = () => {
                     >
                         {loading ? 'Entering...' : 'Login as User'}
                     </button>
-                    <div style={{ marginTop: '1rem', textAlign: 'center' }}>
-                         <button 
-                            type="button" 
-                            className="btn btn-outline" 
-                            style={{ fontSize: '0.9rem', color: '#2e7d32', border: 'none', background: 'none', cursor: 'pointer' }}
-                            onClick={() => navigate('/admin/login')}
-                        >
-                            Switch to Admin Login
-                        </button>
-                    </div>
                 </form>
 
             </div>

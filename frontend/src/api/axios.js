@@ -1,11 +1,10 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: process.env.REACT_APP_API_URL || "https://campus-green-infra-planner.onrender.com/api", // ✅ fixed
+  baseURL: "https://campus-green-infra-planner.onrender.com/api",
   headers: {
     'Content-Type': 'application/json',
   },
-  withCredentials: true
 });
 
 // Attach token to every request

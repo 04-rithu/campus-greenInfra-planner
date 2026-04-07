@@ -16,42 +16,12 @@ const exportRoutes = require("./routes/exportRoutes");
 
 const app = express();
 
-// ✅ FLEXIBLE CORS (Handles phone & laptop URL variations)
-const allowedOrigins = [
-  "https://campus-green-infra-planner.vercel.app",
-  "https://campus-green-infra-planner.vercel.app/"
-];
-
-app.use(cors({
-  origin: function (origin, callback) {
-    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
-      callback(null, true);
-    } else {
-      console.log("⚠️ BLOCKED BY CORS:", origin);
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
-  credentials: true
-}));
-
-// Middleware
+// ✅ SIMPLE CORS (Fixes all Network Errors)
+app.use(cors({ origin: "*" }));
 app.use(express.json());
 
-// Request Logger (Prints the Device's Origin)
-app.use((req, res, next) => {
-  console.log(`${new Date().toISOString()} - ${req.method} ${req.url}`);
-  console.log('Device Origin:', req.headers.origin || "Local/Direct");
-  next();
-});
-
-// ✅ Root + Health Routes
-app.get("/", (req, res) => {
-  res.send("Campus Green Backend is Live!");
-});
-
-app.get("/api/health", (req, res) => {
-  res.json({ status: "ok", message: "Backend is running" });
-});
+// ✅ Health Check
+app.get("/api/health", (req, res) => res.json({ status: "ok", message: "Backend is running" }));
 
 // ✅ Connect DB
 connectDB();
