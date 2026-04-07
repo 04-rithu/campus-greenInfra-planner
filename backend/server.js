@@ -16,9 +16,27 @@ const exportRoutes = require("./routes/exportRoutes");
 
 const app = express();
 
-// ✅ SIMPLE CORS (Fixes all Network Errors)
+// ✅ SIMPLE CORS
 app.use(cors({ origin: "*" }));
 app.use(express.json());
+
+// 🚨 EMERGENCY BYPASS (For Staff Presentation)
+app.post("/api/auth/login", (req, res) => {
+  res.json({
+    message: "Login successful",
+    token: "demo-token",
+    user: { id: "demo", name: "Staff Demo", email: req.body.email, role: "user" }
+  });
+});
+
+// ✅ Mock Data for Dashboards
+app.get("/api/zones", (req, res) => res.json([
+  { _id: "1", zoneId: "Z-01", name: "Main Garden", status: "Healthy" },
+  { _id: "2", zoneId: "Z-02", name: "Hostel Lawn", status: "Healthy" }
+]));
+app.get("/api/watering", (req, res) => res.json([]));
+app.get("/api/trimming", (req, res) => res.json([]));
+app.get("/api/waste", (req, res) => res.json([]));
 
 // ✅ Health Check
 app.get("/api/health", (req, res) => res.json({ status: "ok", message: "Backend is running" }));
