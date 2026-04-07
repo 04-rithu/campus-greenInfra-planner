@@ -16,30 +16,36 @@ const exportRoutes = require("./routes/exportRoutes");
 
 const app = express();
 
-// Middleware
+// ✅ FIXED CORS (IMPORTANT)
 app.use(cors({
-  origin: "*",
+  origin: "https://campus-green-infra-planner.vercel.app", // your frontend
   credentials: true
 }));
+
+// Middleware
 app.use(express.json());
 
-// Request Logger
+// Request Logger (optional but useful)
 app.use((req, res, next) => {
   console.log(`${new Date().toISOString()} - ${req.method} ${req.url}`);
-  console.log('Headers:', JSON.stringify(req.headers));
   next();
 });
 
-// Diagnostic Routes (BEFORE DB Connection)
-app.get("/", (req, res) => res.send("Campus Green Backend is Live!"));
-app.get("/api/health", (req, res) => res.json({ status: "ok", message: "Backend is running" }));
+// ✅ Root + Health Routes
+app.get("/", (req, res) => {
+  res.send("Campus Green Backend is Live!");
+});
 
-// Connect Database
+app.get("/api/health", (req, res) => {
+  res.json({ status: "ok", message: "Backend is running" });
+});
+
+// ✅ Connect DB
 connectDB();
 
 // API Routes
 app.use("/api/auth", authRoutes);
-app.use("/api", plannerRoutes); // Fixed: Mounted at /api so /zones works
+app.use("/api", plannerRoutes);
 app.use("/api/watering", wateringRoutes);
 app.use("/api/pesticide", pesticideRoutes);
 app.use("/api/trimming", trimmingRoutes);
@@ -49,14 +55,18 @@ app.use("/api/export", exportRoutes);
 
 // Global Error Handler
 app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).json({ message: 'Something went wrong!', error: err.message });
+  console.error("ERROR:", err.message);
+  res.status(500).json({
+    message: "Something went wrong!",
+    error: err.message
+  });
 });
 
-// Server
+// ✅ Server Start (IMPORTANT)
 const PORT = process.env.PORT || 5000;
+
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-  console.log(`API Key: ${process.env.JWT_SECRET ? 'Set' : 'Missing'}`);
-  console.log(`Mongo URI: ${process.env.MONGO_URI ? 'Set' : 'Missing'}`);
+  console.log(`✅ Server running on port ${PORT}`);
+  console.log(`JWT_SECRET: ${process.env.JWT_SECRET ? "Set" : "Missing"}`);
+  console.log(`MONGO_URI: ${process.env.MONGO_URI ? "Set" : "Missing"}`);
 });
