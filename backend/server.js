@@ -33,6 +33,7 @@ app.use((req, res, next) => {
 connectDB();
 
 // Routes
+app.get("/api/health", (req, res) => res.json({ status: "ok", message: "Backend is running" }));
 app.use("/api/auth", authRoutes);
 app.use("/api", plannerRoutes); // Fixed: Mounted at /api so /zones works
 app.use("/api/watering", wateringRoutes);

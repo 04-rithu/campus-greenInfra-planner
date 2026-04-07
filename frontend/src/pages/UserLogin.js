@@ -25,7 +25,8 @@ const UserLogin = () => {
                 toast.error('Access Denied: Not a standard user');
             }
         } catch (error) {
-            toast.error(error.response?.data?.message || 'Login failed.');
+            const message = error.response?.data?.message || error.message || 'Login failed.';
+            toast.error(message);
         } finally {
             setLoading(false);
         }

@@ -25,7 +25,9 @@ const AdminLogin = () => {
                 toast.error('Access Denied: Not an Admin');
             }
         } catch (error) {
-            toast.error(error.response?.data?.message || 'Login failed.');
+            console.error('Admin Login Error:', error);
+            const message = error.response?.data?.message || error.message || 'Login failed.';
+            toast.error(message);
         } finally {
             setLoading(false);
         }
