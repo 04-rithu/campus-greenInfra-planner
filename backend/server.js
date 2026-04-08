@@ -7,7 +7,7 @@ const connectDB = require("./config/db");
 
 // Route imports
 const plannerRoutes = require("./routes/plannerRoutes");
-const wateringRoutes = require("./wateringRoutes");
+const wateringRoutes = require("./routes/wateringRoutes");
 const pesticideRoutes = require("./routes/pesticideRoutes");
 const trimmingRoutes = require("./routes/trimmingRoutes");
 const wasteRoutes = require("./routes/wasteRoutes");
