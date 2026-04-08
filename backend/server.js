@@ -27,6 +27,22 @@ app.use(express.json());
 // ✅ Health Check
 app.get("/api/health", (req, res) => res.json({ status: "ok", message: "Backend is running" }));
 
+// ✅ DB Diagnostic Check
+app.get("/api/db-test", async (req, res) => {
+  try {
+    const User = require("./models/User");
+    await User.findOne();
+    res.json({ status: "Success", message: "Database is connected!" });
+  } catch (err) {
+    res.status(500).json({ 
+      status: "Failed", 
+      message: "Database connection failed", 
+      error: err.message,
+      tip: "Check your MONGO_URI and Atlas IP Whitelist (0.0.0.0/0)"
+    });
+  }
+});
+
 // Database connection moved to server start for bypass stability
 // connectDB(); // Deactivating here to avoid blocking startup
 
