@@ -144,7 +144,8 @@ const Pesticide = () => {
         <h2 style={{ color: '#7b1fa2' }}>Pesticide Application</h2>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: '2rem' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: isAdmin ? '1fr 2fr' : '1fr', gap: '2rem' }}>
+        {isAdmin && (
           <div className="card" style={{ height: 'fit-content' }}>
             <h3 className="mb-4">Record Usage</h3>
             <form onSubmit={handleSubmit}>
@@ -202,6 +203,7 @@ const Pesticide = () => {
               </button>
             </form>
           </div>
+        )}
 
         <div className="card">
           <div className="flex justify-between items-center mb-4">

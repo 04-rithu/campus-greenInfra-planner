@@ -30,14 +30,18 @@ exports.register = async (req, res) => {
 exports.login = async (req, res) => {
   try {
     const { email, password } = req.body;
-
-    const user = await User.findOne({ email });
+    const decodedEmail = email.trim().toLowerCase();
+    console.log(`[DEBUG] Attempting login for: "${decodedEmail}"`);
+    
+    const user = await User.findOne({ email: decodedEmail });
     if (!user) {
+      console.log(`[DEBUG] User not found in DB: "${decodedEmail}"`);
       return res.status(400).json({ message: "Invalid credentials" });
     }
 
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
+      console.log(`[DEBUG] Password mismatch for user: "${decodedEmail}"`);
       return res.status(400).json({ message: "Invalid credentials" });
     }
 

@@ -22,7 +22,7 @@ app.use(cors({ origin: "*" }));
 app.use(express.json());
 
 // 🚨 DEMO MODE (For Staff Presentation - 300 records per module)
-app.use(demoMiddleware);
+// app.use(demoMiddleware);
 
 // ✅ Health Check
 app.get("/api/health", (req, res) => res.json({ status: "ok", message: "Backend is running" }));

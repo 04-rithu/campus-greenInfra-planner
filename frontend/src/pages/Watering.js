@@ -146,7 +146,8 @@ const Watering = () => {
         <h2 style={{ color: '#0288d1' }}>Watering Schedule</h2>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: '2rem' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: isAdmin ? '1fr 2fr' : '1fr', gap: '2rem' }}>
+        {isAdmin && (
           <div className="card" style={{ height: 'fit-content' }}>
             <h3 className="mb-4">Schedule Watering</h3>
             <form onSubmit={handleSubmit}>
@@ -218,6 +219,7 @@ const Watering = () => {
               </button>
             </form>
           </div>
+        )}
 
         <div className="card">
           <div className="flex justify-between items-center mb-4">
