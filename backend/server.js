@@ -7,7 +7,7 @@ const connectDB = require("./config/db");
 
 // Route imports
 const plannerRoutes = require("./routes/plannerRoutes");
-const wateringRoutes = require("./routes/wateringRoutes");
+const wateringRoutes = require("./wateringRoutes");
 const pesticideRoutes = require("./routes/pesticideRoutes");
 const trimmingRoutes = require("./routes/trimmingRoutes");
 const wasteRoutes = require("./routes/wasteRoutes");
@@ -42,10 +42,11 @@ app.use("/api/export", exportRoutes);
 
 // Global Error Handler
 app.use((err, req, res, next) => {
-  console.error("ERROR:", err.message);
+  console.error("CRITICAL ERROR:", err.message);
   res.status(500).json({
-    message: "Something went wrong!",
-    error: err.message
+    message: "Server Error",
+    error: err.message,
+    stack: process.env.NODE_ENV === 'production' ? null : err.stack
   });
 });
 
