@@ -139,9 +139,8 @@ const Waste = () => {
                 <h2 style={{ color: '#7b1fa2' }}>Waste Collection</h2>
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: isAdmin ? '1fr 2fr' : '1fr', gap: '2rem' }}>
-                {isAdmin && (
-                    <div className="card" style={{ height: 'fit-content' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: '2rem' }}>
+                <div className="card" style={{ height: 'fit-content' }}>
                         <h3 className="mb-4">Schedule Collection</h3>
                         <form onSubmit={handleSubmit}>
                             <div className="form-group">
@@ -187,9 +186,7 @@ const Waste = () => {
                             </button>
                         </form>
                     </div>
-                )}
-
-                <div className="card">
+                </div>
                     <div className="flex justify-between items-center mb-4">
                         <h3>Collection History</h3>
                         <div className="flex gap-2">
