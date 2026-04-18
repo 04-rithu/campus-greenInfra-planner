@@ -8,6 +8,7 @@ import ActionButtons from '../components/ActionButtons';
 import Pagination from '../components/Pagination';
 import { useAuth } from '../context/AuthContext';
 
+// User Portal: Standard users can now schedule watering
 const Watering = () => {
   const { user } = useAuth();
   const isAdmin = user?.role === 'admin';

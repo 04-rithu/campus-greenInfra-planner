@@ -180,6 +180,7 @@ const Waste = () => {
                                     onChange={handleInputChange}
                                     required
                                 />
+                            </div>
                             <button type="submit" className="btn btn-primary" style={{ width: '100%', backgroundColor: '#7b1fa2' }}>
                                 <FaPlus style={{ marginRight: '0.5rem' }} /> Record
                             </button>
