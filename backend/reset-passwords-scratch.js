@@ -16,7 +16,12 @@ const resetPasswords = async () => {
       { password: adminPassword, role: "admin" },
       { upsert: true, new: true }
     );
-    console.log("Admin account updated: admin@campus.edu / admin123");
+    await User.findOneAndUpdate(
+      { email: "admin@campus.com" },
+      { password: adminPassword, role: "admin" },
+      { upsert: true, new: true }
+    );
+    console.log("Admin accounts updated: admin@campus.edu / admin123 and admin@campus.com / admin123");
 
     // User Reset
     const userPassword = await bcrypt.hash("user123", 10);

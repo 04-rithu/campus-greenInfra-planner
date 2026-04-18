@@ -180,32 +180,32 @@ const Waste = () => {
                                     onChange={handleInputChange}
                                     required
                                 />
-                            </div>
                             <button type="submit" className="btn btn-primary" style={{ width: '100%', backgroundColor: '#7b1fa2' }}>
                                 <FaPlus style={{ marginRight: '0.5rem' }} /> Record
                             </button>
                         </form>
                     </div>
-                </div>
-                    <div className="flex justify-between items-center mb-4">
-                        <h3>Collection History</h3>
-                        <div className="flex gap-2">
-                            {isAdmin && (
-                                <button className="btn btn-outline flex items-center gap-2" onClick={handleExport}>
-                                    <FaDownload /> Export
-                                </button>
-                            )}
-                            <input
-                                type="text"
-                                placeholder="Search by Zone..."
-                                className="form-input"
-                                style={{ width: '250px' }}
-                                value={searchTerm}
-                                onChange={(e) => setSearchTerm(e.target.value)}
-                            />
+
+                    <div className="card">
+                        <div className="flex justify-between items-center mb-4">
+                            <h3>Collection History</h3>
+                            <div className="flex gap-2">
+                                {isAdmin && (
+                                    <button className="btn btn-outline flex items-center gap-2" onClick={handleExport}>
+                                        <FaDownload /> Export
+                                    </button>
+                                )}
+                                <input
+                                    type="text"
+                                    placeholder="Search by Zone..."
+                                    className="form-input"
+                                    style={{ width: '250px' }}
+                                    value={searchTerm}
+                                    onChange={(e) => setSearchTerm(e.target.value)}
+                                />
+                            </div>
                         </div>
-                    </div>
-                    <div className="table-container">
+                        <div className="table-container">
                         <table className="data-table">
                             <thead>
                                 <tr>

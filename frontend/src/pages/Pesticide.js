@@ -202,11 +202,10 @@ const Pesticide = () => {
               </button>
             </form>
           </div>
-        </div>
 
-        <div className="card">
-          <div className="flex justify-between items-center mb-4">
-            <h3>Application History</h3>
+          <div className="card">
+            <div className="flex justify-between items-center mb-4">
+              <h3>Application History</h3>
             <div className="flex gap-2">
               {isAdmin && (
                 <button className="btn btn-outline flex items-center gap-2" onClick={handleExport}>
