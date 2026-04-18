@@ -184,6 +184,7 @@ const LandingPage = () => {
                     <span style={{ fontWeight: 'bold' }}>EcoPlan Campus Infrastructure</span>
                 </div>
                 <p style={{ fontSize: '0.9rem', opacity: 0.7 }}>&copy; 2026 Campus Green Infrastructure Planner. All rights reserved.</p>
+                <p style={{ fontSize: '0.7rem', opacity: 0.5, marginTop: '0.5rem' }}>v1.2.0-overhaul</p>
             </footer>
         </div>
     );
