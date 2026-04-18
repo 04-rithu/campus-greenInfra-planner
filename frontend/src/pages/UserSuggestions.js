@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { FaCommentAlt, FaPlus, FaSearch } from 'react-icons/fa';
+import { FaCommentAlt, FaSearch } from 'react-icons/fa';
 import { toast } from 'react-toastify';
 import api from '../api/axios';
 import Loader from '../components/Loader';
@@ -12,7 +12,7 @@ const UserSuggestions = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const recordsPerPage = 10;
     
-    const [showModal, setShowModal] = useState(false);
+    
     const [formData, setFormData] = useState({
         zone: '',
         suggestion_type: '',
@@ -44,7 +44,7 @@ const UserSuggestions = () => {
         try {
             await api.post('/suggestions', formData);
             toast.success('Suggestion submitted successfully!');
-            setShowModal(false);
+            // No longer using modal
             setFormData({ zone: '', suggestion_type: '', description: '' });
             fetchSuggestions();
             setCurrentPage(1);
