@@ -38,48 +38,95 @@ const UserLogin = () => {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            backgroundColor: '#e8f5e9'
+            background: 'linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url("https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?auto=format&fit=crop&q=80&w=2560")',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            padding: '1rem'
         }}>
-            <div className="card" style={{ width: '100%', maxWidth: '400px', padding: '2rem', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}>
-                <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-                    <FaUser size={50} color="#2e7d32" />
-                    <h2 style={{ marginTop: '1rem', color: '#2e7d32' }}>User Portal</h2>
-                    <p style={{ color: '#5f6368' }}>Access campus environmental data</p>
+            <div className="glass-card animate-fade-in" style={{ 
+                width: '100%', 
+                maxWidth: '450px', 
+                padding: '3rem',
+                border: '1px solid rgba(255,255,255,0.2)'
+            }}>
+                <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
+                    <div style={{ 
+                        width: '70px', 
+                        height: '70px', 
+                        backgroundColor: 'rgba(46, 125, 50, 0.1)', 
+                        borderRadius: '50%', 
+                        display: 'flex', 
+                        alignItems: 'center', 
+                        justifyContent: 'center', 
+                        margin: '0 auto 1.5rem'
+                    }}>
+                        <FaUser size={30} color="#1b5e20" />
+                    </div>
+                    <h2 style={{ fontSize: '2rem', fontWeight: 800, color: '#1b5e20', marginBottom: '0.5rem' }}>User Login</h2>
+                    <p style={{ color: '#455a64', fontSize: '1rem' }}>Welcome back to the Green Portal</p>
                 </div>
 
-                <form onSubmit={handleSubmit}>
-                    <div className="form-group">
-                        <label className="form-label">Email Address</label>
+                <form onSubmit={handleSubmit} className="animate-fade-in" style={{ animationDelay: '0.2s' }}>
+                    <div className="form-group" style={{ marginBottom: '1.5rem' }}>
+                        <label className="form-label" style={{ fontSize: '0.9rem', color: '#1b5e20' }}>Email Address</label>
                         <input
                             type="email"
                             className="form-input"
+                            style={{ 
+                                backgroundColor: 'rgba(255,255,255,0.8)', 
+                                border: '1px solid rgba(46, 125, 50, 0.2)',
+                                padding: '0.9rem'
+                            }}
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                             required
+                            placeholder="user@campus.edu"
                         />
                     </div>
 
-                    <div className="form-group">
-                        <label className="form-label">Password</label>
+                    <div className="form-group" style={{ marginBottom: '2rem' }}>
+                        <label className="form-label" style={{ fontSize: '0.9rem', color: '#1b5e20' }}>Password</label>
                         <input
                             type="password"
                             className="form-input"
+                            style={{ 
+                                backgroundColor: 'rgba(255,255,255,0.8)', 
+                                border: '1px solid rgba(46, 125, 50, 0.2)',
+                                padding: '0.9rem'
+                            }}
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                             required
+                            placeholder="••••••••"
                         />
                     </div>
 
                     <button
                         type="submit"
                         className="btn btn-primary"
-                        style={{ width: '100%', padding: '0.75rem', backgroundColor: '#2e7d32', borderColor: '#2e7d32' }}
+                        style={{ 
+                            width: '100%', 
+                            padding: '1rem', 
+                            fontSize: '1.1rem', 
+                            fontWeight: 600,
+                            backgroundColor: '#2e7d32', 
+                            boxShadow: '0 4px 15px rgba(46, 125, 50, 0.3)',
+                            transition: 'all 0.3s'
+                        }}
+                        onMouseOver={(e) => e.currentTarget.style.transform = 'translateY(-2px)'}
+                        onMouseOut={(e) => e.currentTarget.style.transform = 'translateY(0)'}
                         disabled={loading}
                     >
-                        {loading ? 'Entering...' : 'Login as User'}
+                        {loading ? 'Authenticating...' : 'Login to Dashboard'}
                     </button>
                 </form>
 
+                <div style={{ marginTop: '2rem', textAlign: 'center', borderTop: '1px solid rgba(0,0,0,0.05)', paddingTop: '1.5rem' }}>
+                    <p style={{ color: '#607d8b', fontSize: '0.9rem' }}>
+                        Don't have an account? <Link to="/register" style={{ color: '#2e7d32', fontWeight: 700 }}>Register Now</Link>
+                    </p>
+                    <Link to="/" style={{ display: 'block', marginTop: '1rem', color: '#78909c', fontSize: '0.85rem' }}>&larr; Back to Home</Link>
+                </div>
             </div>
         </div>
     );

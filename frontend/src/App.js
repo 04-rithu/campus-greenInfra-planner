@@ -23,6 +23,7 @@ import UserDashboard from './pages/UserDashboard';
 import Suggestions from './pages/Suggestions';
 import UserSuggestions from './pages/UserSuggestions';
 import Register from './pages/Register';
+import LandingPage from './pages/LandingPage';
 
 function App() {
   return (
@@ -30,7 +31,7 @@ function App() {
       <Router>
         <Routes>
           {/* Public Routes */}
-          <Route path="/" element={<Navigate to="/user/login" replace />} />
+          <Route path="/" element={<LandingPage />} />
           <Route path="/admin/login" element={<AdminLogin />} />
           <Route path="/user/login" element={<UserLogin />} />
           <Route path="/register" element={<Register />} />
